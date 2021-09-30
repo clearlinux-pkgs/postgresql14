@@ -63,7 +63,6 @@ Configure miss: whether to build with Bonjour support
 Configure miss: whether to build with GSSAPI support
 Configure miss: whether to build with ICU support
 Configure miss: whether to build with LDAP support
-Configure miss: whether to build with LZ4 support
 Configure miss: whether to build with SELinux support
 Configure miss: whether to build with Tcl
 Configure miss: whether to build with XML support

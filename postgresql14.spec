@@ -4,7 +4,7 @@
 #
 Name     : postgresql14
 Version  : 14.0
-Release  : 5
+Release  : 6
 URL      : https://ftp.postgresql.org/pub/source/v14.0/postgresql-14.0.tar.gz
 Source0  : https://ftp.postgresql.org/pub/source/v14.0/postgresql-14.0.tar.gz
 Summary  : No detailed summary available
@@ -98,7 +98,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1633011673
+export SOURCE_DATE_EPOCH=1633013497
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -119,11 +119,12 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
 --with-openssl \
 --with-python \
 --with-pam \
---with-uuid=e2fs
+--with-uuid=e2fs \
+--with-lz4
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1633011673
+export SOURCE_DATE_EPOCH=1633013497
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/postgresql14
 cp %{_builddir}/postgresql-14.0/COPYRIGHT %{buildroot}/usr/share/package-licenses/postgresql14/b65c2d5331bc4d97b4b88e5a0cbf98c0452ea8d7
