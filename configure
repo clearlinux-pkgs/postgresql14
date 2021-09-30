@@ -1,0 +1,15 @@
+--prefix=/usr/share/postgresql14
+--bindir=/usr/libexec/postgresql14
+--sysconfdir=/etc/postgresql14
+--datadir=/usr/share/postgresql14
+--includedir=/usr/include/postgresql14
+--libdir=/usr/lib64/postgresql14
+--with-includes=/usr/include/readline/
+--enable-tap-tests
+--with-systemd
+--with-openssl
+--with-python
+--with-pam
+--with-uuid=e2fs
+--with-lz4
+

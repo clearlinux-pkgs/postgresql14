@@ -1,0 +1,69 @@
+Configure miss: CRYPTO_lock
+Configure miss: PS_STRINGS
+Configure miss: __cpuid
+Configure miss: __crc32cb, __crc32ch, __crc32cw, and __crc32cd with CFLAGS=
+Configure miss: __crc32cb, __crc32ch, __crc32cw, and __crc32cd with CFLAGS=-march=armv8-a+crc
+Configure miss: atomic.h
+Configure miss: atomic.h presence
+Configure miss: atomic.h usability
+Configure miss: copyfile
+Configure miss: copyfile.h
+Configure miss: copyfile.h presence
+Configure miss: copyfile.h usability
+Configure miss: dbtoepub
+Configure miss: fls
+Configure miss: int64
+Configure miss: int8
+Configure miss: library containing setproctitle
+Configure miss: library containing shl_load
+Configure miss: mbarrier.h
+Configure miss: mbarrier.h presence
+Configure miss: mbarrier.h usability
+Configure miss: mbstowcs_l
+Configure miss: memset_s
+Configure miss: pstat
+Configure miss: pthread_is_threaded_np
+Configure miss: setproctitle_fast
+Configure miss: struct cmsgcred
+Configure miss: struct sockaddr_storage.__ss_family
+Configure miss: struct sockaddr_storage.__ss_len
+Configure miss: struct sockaddr_storage.ss_len
+Configure miss: sys/event.h
+Configure miss: sys/event.h presence
+Configure miss: sys/event.h usability
+Configure miss: sys/procctl.h
+Configure miss: sys/procctl.h presence
+Configure miss: sys/procctl.h usability
+Configure miss: sys/pstat.h presence
+Configure miss: sys/pstat.h usability
+Configure miss: sys/tas.h
+Configure miss: sys/tas.h presence
+Configure miss: sys/tas.h usability
+Configure miss: ucred.h
+Configure miss: ucred.h presence
+Configure miss: ucred.h usability
+Configure miss: uint64
+Configure miss: uint8
+Configure miss: union semun
+Configure miss: uuid_generate
+Configure miss: wcstombs_l
+Configure miss: wcstombs_l declaration
+Configure miss: whether F_FULLFSYNC is declared
+Configure miss: whether NLS is wanted
+Configure miss: whether g++ supports -Werror=unguarded-availability-new, for CXXFLAGS
+Configure miss: whether g++ supports -fexcess-precision=standard, for CXXFLAGS
+Configure miss: whether gcc supports -Werror=unguarded-availability-new, for CFLAGS
+Configure miss: whether gcc supports -Wunused-command-line-argument, for NOT_THE_CFLAGS
+Configure miss: whether gettimeofday takes only one argument
+Configure miss: whether strerror_r returns int
+Configure miss: whether strlcat is declared
+Configure miss: whether to build Perl modules
+Configure miss: whether to build with BSD Authentication support
+Configure miss: whether to build with Bonjour support
+Configure miss: whether to build with GSSAPI support
+Configure miss: whether to build with ICU support
+Configure miss: whether to build with LDAP support
+Configure miss: whether to build with LZ4 support
+Configure miss: whether to build with SELinux support
+Configure miss: whether to build with Tcl
+Configure miss: whether to build with XML support
