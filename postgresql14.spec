@@ -4,7 +4,7 @@
 #
 Name     : postgresql14
 Version  : 14.0
-Release  : 6
+Release  : 7
 URL      : https://ftp.postgresql.org/pub/source/v14.0/postgresql-14.0.tar.gz
 Source0  : https://ftp.postgresql.org/pub/source/v14.0/postgresql-14.0.tar.gz
 Summary  : No detailed summary available
