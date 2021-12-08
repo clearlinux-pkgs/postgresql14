@@ -1,0 +1,18 @@
+[Unit]
+After=syslog.target
+ConditionPathExists=!/var/lib/pgsql14
+
+[Service]
+User=postgres
+PermissionsStartOnly=true
+Type=oneshot
+ExecStartPre=/usr/bin/install -d -m 0700 -opostgres -gpostgres /var/lib/pgsql14/data
+#
+# Without -A/--auth, initdb defaults to using "trust" authentication. In other
+# words, anyone can connect (locally via unix sockets and remotely via TCP).
+# The assumption there is that the admin will immediately configure user
+# authentication. Since we can't do that, and having a wide-open SQL server
+# running is suboptimal, we default to rejecting all connections until the
+# user explicitly sets this up
+#
+ExecStart=/usr/libexec/postgresql14/initdb -D /var/lib/pgsql14/data --auth=reject

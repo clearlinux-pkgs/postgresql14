@@ -4,16 +4,21 @@
 #
 Name     : postgresql14
 Version  : 14.0
-Release  : 7
+Release  : 8
 URL      : https://ftp.postgresql.org/pub/source/v14.0/postgresql-14.0.tar.gz
 Source0  : https://ftp.postgresql.org/pub/source/v14.0/postgresql-14.0.tar.gz
+Source1  : postgresql14-install.service
+Source2  : postgresql14.service
+Source3  : postgresql14.tmpfiles
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : PostgreSQL TCL
+Requires: postgresql14-config = %{version}-%{release}
 Requires: postgresql14-data = %{version}-%{release}
 Requires: postgresql14-lib = %{version}-%{release}
 Requires: postgresql14-libexec = %{version}-%{release}
 Requires: postgresql14-license = %{version}-%{release}
+Requires: postgresql14-services = %{version}-%{release}
 BuildRequires : Linux-PAM-dev
 BuildRequires : bison
 BuildRequires : flex
@@ -40,6 +45,14 @@ PostgreSQL Database Management System
 =====================================
 This directory contains the source code distribution of the PostgreSQL
 database management system.
+
+%package config
+Summary: config components for the postgresql14 package.
+Group: Default
+
+%description config
+config components for the postgresql14 package.
+
 
 %package data
 Summary: data components for the postgresql14 package.
@@ -75,6 +88,7 @@ lib components for the postgresql14 package.
 %package libexec
 Summary: libexec components for the postgresql14 package.
 Group: Default
+Requires: postgresql14-config = %{version}-%{release}
 Requires: postgresql14-license = %{version}-%{release}
 
 %description libexec
@@ -89,6 +103,14 @@ Group: Default
 license components for the postgresql14 package.
 
 
+%package services
+Summary: services components for the postgresql14 package.
+Group: Systemd services
+
+%description services
+services components for the postgresql14 package.
+
+
 %prep
 %setup -q -n postgresql-14.0
 cd %{_builddir}/postgresql-14.0
@@ -98,7 +120,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1633013497
+export SOURCE_DATE_EPOCH=1638949434
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -124,12 +146,17 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1633013497
+export SOURCE_DATE_EPOCH=1638949434
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/postgresql14
 cp %{_builddir}/postgresql-14.0/COPYRIGHT %{buildroot}/usr/share/package-licenses/postgresql14/b65c2d5331bc4d97b4b88e5a0cbf98c0452ea8d7
 cp %{_builddir}/postgresql-14.0/src/backend/regex/COPYRIGHT %{buildroot}/usr/share/package-licenses/postgresql14/9ca05e9c70d9823e191d9b3876ecdeb57c53c725
 %make_install
+mkdir -p %{buildroot}/usr/lib/systemd/system
+install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/postgresql14-install.service
+install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/postgresql14.service
+mkdir -p %{buildroot}/usr/lib/tmpfiles.d
+install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 
 %files
 %defattr(-,root,root,-)
@@ -153,6 +180,10 @@ cp %{_builddir}/postgresql-14.0/src/backend/regex/COPYRIGHT %{buildroot}/usr/sha
 /usr/lib64/postgresql14/pkgconfig/libecpg_compat.pc
 /usr/lib64/postgresql14/pkgconfig/libpgtypes.pc
 /usr/lib64/postgresql14/pkgconfig/libpq.pc
+
+%files config
+%defattr(-,root,root,-)
+/usr/lib/tmpfiles.d/postgresql14.conf
 
 %files data
 %defattr(-,root,root,-)
@@ -1748,3 +1779,8 @@ cp %{_builddir}/postgresql-14.0/src/backend/regex/COPYRIGHT %{buildroot}/usr/sha
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/postgresql14/9ca05e9c70d9823e191d9b3876ecdeb57c53c725
 /usr/share/package-licenses/postgresql14/b65c2d5331bc4d97b4b88e5a0cbf98c0452ea8d7
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/postgresql14-install.service
+/usr/lib/systemd/system/postgresql14.service

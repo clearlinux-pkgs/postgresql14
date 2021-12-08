@@ -1,0 +1,18 @@
+# Adapted from https://www.postgresql.org/docs/devel/static/server-start.html
+[Unit]
+Description=PostgreSQL database server
+Documentation=man:postgres(1)
+After=postgresql14-install.service
+Requires=postgresql14-install.service
+
+[Service]
+Type=notify
+User=postgres
+ExecStart=/usr/libexec/postgresql14/postgres -D /var/lib/pgsql14/data
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+KillSignal=SIGINT
+TimeoutSec=0
+
+[Install]
+WantedBy=multi-user.target
