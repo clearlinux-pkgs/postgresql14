@@ -4,7 +4,7 @@
 #
 Name     : postgresql14
 Version  : 14.1
-Release  : 10
+Release  : 11
 URL      : https://ftp.postgresql.org/pub/source/v14.1/postgresql-14.1.tar.gz
 Source0  : https://ftp.postgresql.org/pub/source/v14.1/postgresql-14.1.tar.gz
 Source1  : postgresql14-install.service
