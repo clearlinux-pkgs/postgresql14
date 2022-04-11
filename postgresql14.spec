@@ -4,7 +4,7 @@
 #
 Name     : postgresql14
 Version  : 14.2
-Release  : 12
+Release  : 13
 URL      : https://ftp.postgresql.org/pub/source/v14.2/postgresql-14.2.tar.gz
 Source0  : https://ftp.postgresql.org/pub/source/v14.2/postgresql-14.2.tar.gz
 Source1  : postgresql14-install.service
@@ -120,7 +120,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1644513668
+export SOURCE_DATE_EPOCH=1649711267
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -146,7 +146,7 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1644513668
+export SOURCE_DATE_EPOCH=1649711267
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/postgresql14
 cp %{_builddir}/postgresql-14.2/COPYRIGHT %{buildroot}/usr/share/package-licenses/postgresql14/db5a4f50b09e55794c5812fec9718988aa4486e8
@@ -157,6 +157,9 @@ install -m 0644 %{SOURCE1} %{buildroot}/usr/lib/systemd/system/postgresql14-inst
 install -m 0644 %{SOURCE2} %{buildroot}/usr/lib/systemd/system/postgresql14.service
 mkdir -p %{buildroot}/usr/lib/tmpfiles.d
 install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
+## install_append content
+make -C contrib DESTDIR=%buildroot install
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -188,10 +191,216 @@ install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 %files data
 %defattr(-,root,root,-)
 /usr/share/postgresql14/errcodes.txt
+/usr/share/postgresql14/extension/adminpack--1.0--1.1.sql
+/usr/share/postgresql14/extension/adminpack--1.0.sql
+/usr/share/postgresql14/extension/adminpack--1.1--2.0.sql
+/usr/share/postgresql14/extension/adminpack--2.0--2.1.sql
+/usr/share/postgresql14/extension/adminpack.control
+/usr/share/postgresql14/extension/amcheck--1.0--1.1.sql
+/usr/share/postgresql14/extension/amcheck--1.0.sql
+/usr/share/postgresql14/extension/amcheck--1.1--1.2.sql
+/usr/share/postgresql14/extension/amcheck--1.2--1.3.sql
+/usr/share/postgresql14/extension/amcheck.control
+/usr/share/postgresql14/extension/autoinc--1.0.sql
+/usr/share/postgresql14/extension/autoinc.control
+/usr/share/postgresql14/extension/bloom--1.0.sql
+/usr/share/postgresql14/extension/bloom.control
+/usr/share/postgresql14/extension/btree_gin--1.0--1.1.sql
+/usr/share/postgresql14/extension/btree_gin--1.0.sql
+/usr/share/postgresql14/extension/btree_gin--1.1--1.2.sql
+/usr/share/postgresql14/extension/btree_gin--1.2--1.3.sql
+/usr/share/postgresql14/extension/btree_gin.control
+/usr/share/postgresql14/extension/btree_gist--1.0--1.1.sql
+/usr/share/postgresql14/extension/btree_gist--1.1--1.2.sql
+/usr/share/postgresql14/extension/btree_gist--1.2--1.3.sql
+/usr/share/postgresql14/extension/btree_gist--1.2.sql
+/usr/share/postgresql14/extension/btree_gist--1.3--1.4.sql
+/usr/share/postgresql14/extension/btree_gist--1.4--1.5.sql
+/usr/share/postgresql14/extension/btree_gist--1.5--1.6.sql
+/usr/share/postgresql14/extension/btree_gist.control
+/usr/share/postgresql14/extension/citext--1.0--1.1.sql
+/usr/share/postgresql14/extension/citext--1.1--1.2.sql
+/usr/share/postgresql14/extension/citext--1.2--1.3.sql
+/usr/share/postgresql14/extension/citext--1.3--1.4.sql
+/usr/share/postgresql14/extension/citext--1.4--1.5.sql
+/usr/share/postgresql14/extension/citext--1.4.sql
+/usr/share/postgresql14/extension/citext--1.5--1.6.sql
+/usr/share/postgresql14/extension/citext.control
+/usr/share/postgresql14/extension/cube--1.0--1.1.sql
+/usr/share/postgresql14/extension/cube--1.1--1.2.sql
+/usr/share/postgresql14/extension/cube--1.2--1.3.sql
+/usr/share/postgresql14/extension/cube--1.2.sql
+/usr/share/postgresql14/extension/cube--1.3--1.4.sql
+/usr/share/postgresql14/extension/cube--1.4--1.5.sql
+/usr/share/postgresql14/extension/cube.control
+/usr/share/postgresql14/extension/dblink--1.0--1.1.sql
+/usr/share/postgresql14/extension/dblink--1.1--1.2.sql
+/usr/share/postgresql14/extension/dblink--1.2.sql
+/usr/share/postgresql14/extension/dblink.control
+/usr/share/postgresql14/extension/dict_int--1.0.sql
+/usr/share/postgresql14/extension/dict_int.control
+/usr/share/postgresql14/extension/dict_xsyn--1.0.sql
+/usr/share/postgresql14/extension/dict_xsyn.control
+/usr/share/postgresql14/extension/earthdistance--1.0--1.1.sql
+/usr/share/postgresql14/extension/earthdistance--1.1.sql
+/usr/share/postgresql14/extension/earthdistance.control
+/usr/share/postgresql14/extension/file_fdw--1.0.sql
+/usr/share/postgresql14/extension/file_fdw.control
+/usr/share/postgresql14/extension/fuzzystrmatch--1.0--1.1.sql
+/usr/share/postgresql14/extension/fuzzystrmatch--1.1.sql
+/usr/share/postgresql14/extension/fuzzystrmatch.control
+/usr/share/postgresql14/extension/hstore--1.1--1.2.sql
+/usr/share/postgresql14/extension/hstore--1.2--1.3.sql
+/usr/share/postgresql14/extension/hstore--1.3--1.4.sql
+/usr/share/postgresql14/extension/hstore--1.4--1.5.sql
+/usr/share/postgresql14/extension/hstore--1.4.sql
+/usr/share/postgresql14/extension/hstore--1.5--1.6.sql
+/usr/share/postgresql14/extension/hstore--1.6--1.7.sql
+/usr/share/postgresql14/extension/hstore--1.7--1.8.sql
+/usr/share/postgresql14/extension/hstore.control
+/usr/share/postgresql14/extension/hstore_plpython2u--1.0.sql
+/usr/share/postgresql14/extension/hstore_plpython2u.control
+/usr/share/postgresql14/extension/hstore_plpython3u--1.0.sql
+/usr/share/postgresql14/extension/hstore_plpython3u.control
+/usr/share/postgresql14/extension/hstore_plpythonu--1.0.sql
+/usr/share/postgresql14/extension/hstore_plpythonu.control
+/usr/share/postgresql14/extension/insert_username--1.0.sql
+/usr/share/postgresql14/extension/insert_username.control
+/usr/share/postgresql14/extension/intagg--1.0--1.1.sql
+/usr/share/postgresql14/extension/intagg--1.1.sql
+/usr/share/postgresql14/extension/intagg.control
+/usr/share/postgresql14/extension/intarray--1.0--1.1.sql
+/usr/share/postgresql14/extension/intarray--1.1--1.2.sql
+/usr/share/postgresql14/extension/intarray--1.2--1.3.sql
+/usr/share/postgresql14/extension/intarray--1.2.sql
+/usr/share/postgresql14/extension/intarray--1.3--1.4.sql
+/usr/share/postgresql14/extension/intarray--1.4--1.5.sql
+/usr/share/postgresql14/extension/intarray.control
+/usr/share/postgresql14/extension/isn--1.0--1.1.sql
+/usr/share/postgresql14/extension/isn--1.1--1.2.sql
+/usr/share/postgresql14/extension/isn--1.1.sql
+/usr/share/postgresql14/extension/isn.control
+/usr/share/postgresql14/extension/jsonb_plpython2u--1.0.sql
+/usr/share/postgresql14/extension/jsonb_plpython2u.control
+/usr/share/postgresql14/extension/jsonb_plpython3u--1.0.sql
+/usr/share/postgresql14/extension/jsonb_plpython3u.control
+/usr/share/postgresql14/extension/jsonb_plpythonu--1.0.sql
+/usr/share/postgresql14/extension/jsonb_plpythonu.control
+/usr/share/postgresql14/extension/lo--1.0--1.1.sql
+/usr/share/postgresql14/extension/lo--1.1.sql
+/usr/share/postgresql14/extension/lo.control
+/usr/share/postgresql14/extension/ltree--1.0--1.1.sql
+/usr/share/postgresql14/extension/ltree--1.1--1.2.sql
+/usr/share/postgresql14/extension/ltree--1.1.sql
+/usr/share/postgresql14/extension/ltree.control
+/usr/share/postgresql14/extension/ltree_plpython2u--1.0.sql
+/usr/share/postgresql14/extension/ltree_plpython2u.control
+/usr/share/postgresql14/extension/ltree_plpython3u--1.0.sql
+/usr/share/postgresql14/extension/ltree_plpython3u.control
+/usr/share/postgresql14/extension/ltree_plpythonu--1.0.sql
+/usr/share/postgresql14/extension/ltree_plpythonu.control
+/usr/share/postgresql14/extension/moddatetime--1.0.sql
+/usr/share/postgresql14/extension/moddatetime.control
+/usr/share/postgresql14/extension/old_snapshot--1.0.sql
+/usr/share/postgresql14/extension/old_snapshot.control
+/usr/share/postgresql14/extension/pageinspect--1.0--1.1.sql
+/usr/share/postgresql14/extension/pageinspect--1.1--1.2.sql
+/usr/share/postgresql14/extension/pageinspect--1.2--1.3.sql
+/usr/share/postgresql14/extension/pageinspect--1.3--1.4.sql
+/usr/share/postgresql14/extension/pageinspect--1.4--1.5.sql
+/usr/share/postgresql14/extension/pageinspect--1.5--1.6.sql
+/usr/share/postgresql14/extension/pageinspect--1.5.sql
+/usr/share/postgresql14/extension/pageinspect--1.6--1.7.sql
+/usr/share/postgresql14/extension/pageinspect--1.7--1.8.sql
+/usr/share/postgresql14/extension/pageinspect--1.8--1.9.sql
+/usr/share/postgresql14/extension/pageinspect.control
+/usr/share/postgresql14/extension/pg_buffercache--1.0--1.1.sql
+/usr/share/postgresql14/extension/pg_buffercache--1.1--1.2.sql
+/usr/share/postgresql14/extension/pg_buffercache--1.2--1.3.sql
+/usr/share/postgresql14/extension/pg_buffercache--1.2.sql
+/usr/share/postgresql14/extension/pg_buffercache.control
+/usr/share/postgresql14/extension/pg_freespacemap--1.0--1.1.sql
+/usr/share/postgresql14/extension/pg_freespacemap--1.1--1.2.sql
+/usr/share/postgresql14/extension/pg_freespacemap--1.1.sql
+/usr/share/postgresql14/extension/pg_freespacemap.control
+/usr/share/postgresql14/extension/pg_prewarm--1.0--1.1.sql
+/usr/share/postgresql14/extension/pg_prewarm--1.1--1.2.sql
+/usr/share/postgresql14/extension/pg_prewarm--1.1.sql
+/usr/share/postgresql14/extension/pg_prewarm.control
+/usr/share/postgresql14/extension/pg_stat_statements--1.0--1.1.sql
+/usr/share/postgresql14/extension/pg_stat_statements--1.1--1.2.sql
+/usr/share/postgresql14/extension/pg_stat_statements--1.2--1.3.sql
+/usr/share/postgresql14/extension/pg_stat_statements--1.3--1.4.sql
+/usr/share/postgresql14/extension/pg_stat_statements--1.4--1.5.sql
+/usr/share/postgresql14/extension/pg_stat_statements--1.4.sql
+/usr/share/postgresql14/extension/pg_stat_statements--1.5--1.6.sql
+/usr/share/postgresql14/extension/pg_stat_statements--1.6--1.7.sql
+/usr/share/postgresql14/extension/pg_stat_statements--1.7--1.8.sql
+/usr/share/postgresql14/extension/pg_stat_statements--1.8--1.9.sql
+/usr/share/postgresql14/extension/pg_stat_statements.control
+/usr/share/postgresql14/extension/pg_surgery--1.0.sql
+/usr/share/postgresql14/extension/pg_surgery.control
+/usr/share/postgresql14/extension/pg_trgm--1.0--1.1.sql
+/usr/share/postgresql14/extension/pg_trgm--1.1--1.2.sql
+/usr/share/postgresql14/extension/pg_trgm--1.2--1.3.sql
+/usr/share/postgresql14/extension/pg_trgm--1.3--1.4.sql
+/usr/share/postgresql14/extension/pg_trgm--1.3.sql
+/usr/share/postgresql14/extension/pg_trgm--1.4--1.5.sql
+/usr/share/postgresql14/extension/pg_trgm--1.5--1.6.sql
+/usr/share/postgresql14/extension/pg_trgm.control
+/usr/share/postgresql14/extension/pg_visibility--1.0--1.1.sql
+/usr/share/postgresql14/extension/pg_visibility--1.1--1.2.sql
+/usr/share/postgresql14/extension/pg_visibility--1.1.sql
+/usr/share/postgresql14/extension/pg_visibility.control
+/usr/share/postgresql14/extension/pgcrypto--1.0--1.1.sql
+/usr/share/postgresql14/extension/pgcrypto--1.1--1.2.sql
+/usr/share/postgresql14/extension/pgcrypto--1.2--1.3.sql
+/usr/share/postgresql14/extension/pgcrypto--1.3.sql
+/usr/share/postgresql14/extension/pgcrypto.control
+/usr/share/postgresql14/extension/pgrowlocks--1.0--1.1.sql
+/usr/share/postgresql14/extension/pgrowlocks--1.1--1.2.sql
+/usr/share/postgresql14/extension/pgrowlocks--1.2.sql
+/usr/share/postgresql14/extension/pgrowlocks.control
+/usr/share/postgresql14/extension/pgstattuple--1.0--1.1.sql
+/usr/share/postgresql14/extension/pgstattuple--1.1--1.2.sql
+/usr/share/postgresql14/extension/pgstattuple--1.2--1.3.sql
+/usr/share/postgresql14/extension/pgstattuple--1.3--1.4.sql
+/usr/share/postgresql14/extension/pgstattuple--1.4--1.5.sql
+/usr/share/postgresql14/extension/pgstattuple--1.4.sql
+/usr/share/postgresql14/extension/pgstattuple.control
 /usr/share/postgresql14/extension/plpgsql--1.0.sql
 /usr/share/postgresql14/extension/plpgsql.control
 /usr/share/postgresql14/extension/plpython3u--1.0.sql
 /usr/share/postgresql14/extension/plpython3u.control
+/usr/share/postgresql14/extension/postgres_fdw--1.0--1.1.sql
+/usr/share/postgresql14/extension/postgres_fdw--1.0.sql
+/usr/share/postgresql14/extension/postgres_fdw.control
+/usr/share/postgresql14/extension/refint--1.0.sql
+/usr/share/postgresql14/extension/refint.control
+/usr/share/postgresql14/extension/seg--1.0--1.1.sql
+/usr/share/postgresql14/extension/seg--1.1--1.2.sql
+/usr/share/postgresql14/extension/seg--1.1.sql
+/usr/share/postgresql14/extension/seg--1.2--1.3.sql
+/usr/share/postgresql14/extension/seg--1.3--1.4.sql
+/usr/share/postgresql14/extension/seg.control
+/usr/share/postgresql14/extension/sslinfo--1.0--1.1.sql
+/usr/share/postgresql14/extension/sslinfo--1.1--1.2.sql
+/usr/share/postgresql14/extension/sslinfo--1.2.sql
+/usr/share/postgresql14/extension/sslinfo.control
+/usr/share/postgresql14/extension/tablefunc--1.0.sql
+/usr/share/postgresql14/extension/tablefunc.control
+/usr/share/postgresql14/extension/tcn--1.0.sql
+/usr/share/postgresql14/extension/tcn.control
+/usr/share/postgresql14/extension/tsm_system_rows--1.0.sql
+/usr/share/postgresql14/extension/tsm_system_rows.control
+/usr/share/postgresql14/extension/tsm_system_time--1.0.sql
+/usr/share/postgresql14/extension/tsm_system_time.control
+/usr/share/postgresql14/extension/unaccent--1.0--1.1.sql
+/usr/share/postgresql14/extension/unaccent--1.1.sql
+/usr/share/postgresql14/extension/unaccent.control
+/usr/share/postgresql14/extension/uuid-ossp--1.0--1.1.sql
+/usr/share/postgresql14/extension/uuid-ossp--1.1.sql
+/usr/share/postgresql14/extension/uuid-ossp.control
 /usr/share/postgresql14/information_schema.sql
 /usr/share/postgresql14/pg_hba.conf.sample
 /usr/share/postgresql14/pg_ident.conf.sample
@@ -199,6 +408,10 @@ install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 /usr/share/postgresql14/postgres.bki
 /usr/share/postgresql14/postgresql.conf.sample
 /usr/share/postgresql14/psqlrc.sample
+/usr/share/postgresql14/share/doc/extension/autoinc.example
+/usr/share/postgresql14/share/doc/extension/insert_username.example
+/usr/share/postgresql14/share/doc/extension/moddatetime.example
+/usr/share/postgresql14/share/doc/extension/refint.example
 /usr/share/postgresql14/snowball_create.sql
 /usr/share/postgresql14/sql_features.txt
 /usr/share/postgresql14/system_constraints.sql
@@ -836,6 +1049,8 @@ install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 /usr/share/postgresql14/tsearch_data/synonym_sample.syn
 /usr/share/postgresql14/tsearch_data/thesaurus_sample.ths
 /usr/share/postgresql14/tsearch_data/turkish.stop
+/usr/share/postgresql14/tsearch_data/unaccent.rules
+/usr/share/postgresql14/tsearch_data/xsyn_sample.rules
 
 %files dev
 %defattr(-,root,root,-)
@@ -1227,6 +1442,11 @@ install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 /usr/include/postgresql14/server/executor/tqueue.h
 /usr/include/postgresql14/server/executor/tstoreReceiver.h
 /usr/include/postgresql14/server/executor/tuptable.h
+/usr/include/postgresql14/server/extension/cube/cubedata.h
+/usr/include/postgresql14/server/extension/hstore/hstore.h
+/usr/include/postgresql14/server/extension/isn/isn.h
+/usr/include/postgresql14/server/extension/ltree/ltree.h
+/usr/include/postgresql14/server/extension/seg/segdata.h
 /usr/include/postgresql14/server/fe_utils/archive.h
 /usr/include/postgresql14/server/fe_utils/cancel.h
 /usr/include/postgresql14/server/fe_utils/conditional.h
@@ -1698,13 +1918,35 @@ install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/postgresql14/_int.so
+/usr/lib64/postgresql14/adminpack.so
+/usr/lib64/postgresql14/amcheck.so
+/usr/lib64/postgresql14/auth_delay.so
+/usr/lib64/postgresql14/auto_explain.so
+/usr/lib64/postgresql14/autoinc.so
+/usr/lib64/postgresql14/bloom.so
+/usr/lib64/postgresql14/btree_gin.so
+/usr/lib64/postgresql14/btree_gist.so
+/usr/lib64/postgresql14/citext.so
+/usr/lib64/postgresql14/cube.so
 /usr/lib64/postgresql14/cyrillic_and_mic.so
+/usr/lib64/postgresql14/dblink.so
+/usr/lib64/postgresql14/dict_int.so
 /usr/lib64/postgresql14/dict_snowball.so
+/usr/lib64/postgresql14/dict_xsyn.so
+/usr/lib64/postgresql14/earthdistance.so
 /usr/lib64/postgresql14/euc2004_sjis2004.so
 /usr/lib64/postgresql14/euc_cn_and_mic.so
 /usr/lib64/postgresql14/euc_jp_and_sjis.so
 /usr/lib64/postgresql14/euc_kr_and_mic.so
 /usr/lib64/postgresql14/euc_tw_and_big5.so
+/usr/lib64/postgresql14/file_fdw.so
+/usr/lib64/postgresql14/fuzzystrmatch.so
+/usr/lib64/postgresql14/hstore.so
+/usr/lib64/postgresql14/hstore_plpython3.so
+/usr/lib64/postgresql14/insert_username.so
+/usr/lib64/postgresql14/isn.so
+/usr/lib64/postgresql14/jsonb_plpython3.so
 /usr/lib64/postgresql14/latin2_and_win1250.so
 /usr/lib64/postgresql14/latin_and_mic.so
 /usr/lib64/postgresql14/libecpg.so
@@ -1720,9 +1962,36 @@ install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 /usr/lib64/postgresql14/libpq.so.5
 /usr/lib64/postgresql14/libpq.so.5.14
 /usr/lib64/postgresql14/libpqwalreceiver.so
+/usr/lib64/postgresql14/lo.so
+/usr/lib64/postgresql14/ltree.so
+/usr/lib64/postgresql14/ltree_plpython3.so
+/usr/lib64/postgresql14/moddatetime.so
+/usr/lib64/postgresql14/old_snapshot.so
+/usr/lib64/postgresql14/pageinspect.so
+/usr/lib64/postgresql14/passwordcheck.so
+/usr/lib64/postgresql14/pg_buffercache.so
+/usr/lib64/postgresql14/pg_freespacemap.so
+/usr/lib64/postgresql14/pg_prewarm.so
+/usr/lib64/postgresql14/pg_stat_statements.so
+/usr/lib64/postgresql14/pg_surgery.so
+/usr/lib64/postgresql14/pg_trgm.so
+/usr/lib64/postgresql14/pg_visibility.so
+/usr/lib64/postgresql14/pgcrypto.so
 /usr/lib64/postgresql14/pgoutput.so
+/usr/lib64/postgresql14/pgrowlocks.so
+/usr/lib64/postgresql14/pgstattuple.so
 /usr/lib64/postgresql14/plpgsql.so
 /usr/lib64/postgresql14/plpython3.so
+/usr/lib64/postgresql14/postgres_fdw.so
+/usr/lib64/postgresql14/refint.so
+/usr/lib64/postgresql14/seg.so
+/usr/lib64/postgresql14/sslinfo.so
+/usr/lib64/postgresql14/tablefunc.so
+/usr/lib64/postgresql14/tcn.so
+/usr/lib64/postgresql14/test_decoding.so
+/usr/lib64/postgresql14/tsm_system_rows.so
+/usr/lib64/postgresql14/tsm_system_time.so
+/usr/lib64/postgresql14/unaccent.so
 /usr/lib64/postgresql14/utf8_and_big5.so
 /usr/lib64/postgresql14/utf8_and_cyrillic.so
 /usr/lib64/postgresql14/utf8_and_euc2004.so
@@ -1739,6 +2008,7 @@ install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 /usr/lib64/postgresql14/utf8_and_sjis2004.so
 /usr/lib64/postgresql14/utf8_and_uhc.so
 /usr/lib64/postgresql14/utf8_and_win.so
+/usr/lib64/postgresql14/uuid-ossp.so
 
 %files libexec
 %defattr(-,root,root,-)
@@ -1749,6 +2019,7 @@ install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 /usr/libexec/postgresql14/dropuser
 /usr/libexec/postgresql14/ecpg
 /usr/libexec/postgresql14/initdb
+/usr/libexec/postgresql14/oid2name
 /usr/libexec/postgresql14/pg_amcheck
 /usr/libexec/postgresql14/pg_archivecleanup
 /usr/libexec/postgresql14/pg_basebackup
@@ -1775,6 +2046,7 @@ install -m 0644 %{SOURCE3} %{buildroot}/usr/lib/tmpfiles.d/postgresql14.conf
 /usr/libexec/postgresql14/psql
 /usr/libexec/postgresql14/reindexdb
 /usr/libexec/postgresql14/vacuumdb
+/usr/libexec/postgresql14/vacuumlo
 
 %files license
 %defattr(0644,root,root,0755)
